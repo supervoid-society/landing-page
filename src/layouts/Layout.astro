@@ -1,3 +1,17 @@
+---
+import "@fontsource/geist-mono";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { 
+	title = "Supervoid Society | IT Community based in Bandar Lampung, Indonesia.",
+	description = "A collective of technical minds operating from the void."
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -6,18 +20,157 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
+		<meta name="description" content={description} />
 	</head>
-	<body>
-		<slot />
+	<body class="bg-oled-black text-[#E0E0E0] selection:bg-[#333333] selection:text-white overflow-x-hidden antialiased">
+		<!-- CRT Overlay -->
+		<div class="crt-overlay pointer-events-none fixed inset-0 z-50 overflow-hidden">
+			<div class="scanlines absolute inset-0"></div>
+			<div class="vignette absolute inset-0"></div>
+		</div>
+
+		<!-- Mission Control Frame -->
+		<div class="mission-frame fixed inset-0 z-40 pointer-events-none border-[1px] border-white/5 m-2 md:m-4 flex flex-col justify-between">
+			<div class="frame-top flex justify-between p-2 border-b border-white/5 bg-[#050505]/80 backdrop-blur-sm pointer-events-auto">
+				<div class="flex items-center gap-4">
+					<span class="text-[10px] font-mono opacity-50 uppercase tracking-widest">System Status: <span class="text-white opacity-100">Optimal</span></span>
+					<span class="hidden md:inline text-[10px] font-mono opacity-50 uppercase tracking-widest">Uplink: <span class="text-white opacity-100">Secure</span></span>
+				</div>
+				<div class="flex items-center gap-4">
+					<div id="mission-clock" class="text-[10px] font-mono text-white tracking-widest">00:00:00 WIB</div>
+				</div>
+			</div>
+			<div class="frame-bottom flex justify-between p-2 border-t border-white/5 bg-[#050505]/80 backdrop-blur-sm pointer-events-auto">
+				<span class="text-[10px] font-mono opacity-50 uppercase tracking-widest">Supervoid Society // Access Level: Public</span>
+				<span class="text-[10px] font-mono opacity-30 uppercase tracking-widest">&copy; 2026 Terminal-01 // TZ: WIB</span>
+			</div>
+		</div>
+
+		<main class="relative z-10 min-h-screen px-4 py-16 md:px-8">
+			<slot />
+		</main>
+
+		<script>
+			function updateClock() {
+				const now = new Date();
+				// Use Intl.DateTimeFormat to get WIB time in client-side script
+				const formatter = new Intl.DateTimeFormat('en-GB', {
+					timeZone: 'Asia/Jakarta',
+					hour: '2-digit',
+					minute: '2-digit',
+					second: '2-digit',
+					hour12: false
+				});
+				
+				const clock = document.getElementById('mission-clock');
+				if (clock) clock.textContent = `${formatter.format(now)} WIB`;
+			}
+
+			// Smooth scrolling for data-scroll-to elements
+			function initSmoothScroll() {
+				const scrollLinks = document.querySelectorAll('[data-scroll-to]');
+				scrollLinks.forEach(link => {
+					link.addEventListener('click', (e) => {
+						const targetId = link.getAttribute('data-scroll-to');
+						const targetElement = document.querySelector(`[data-section="${targetId}"]`);
+						
+						if (targetElement) {
+							e.preventDefault();
+							targetElement.scrollIntoView({
+								behavior: 'smooth',
+								block: 'start'
+							});
+						}
+					});
+				});
+			}
+
+			setInterval(updateClock, 1000);
+			updateClock();
+			initSmoothScroll();
+
+			// Re-init on Astro page transitions if needed
+			document.addEventListener('astro:page-load', () => {
+				initSmoothScroll();
+			});
+		</script>
 	</body>
 </html>
 
-<style>
-	html,
+<style is:global>
+	@import "tailwindcss";
+
+	@theme {
+		--color-oled-black: #050505;
+		--font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+		--font-mono: "Geist Mono", "GeistMono", ui-monospace, SFMono-Regular, "Roboto Mono", Menlo, Monaco, "Liberation Mono", "DejaVu Sans Mono", "Courier New", monospace;
+	}
+
+	@layer base {
+		html {
+			@apply scroll-smooth;
+			font-family: var(--font-sans);
+		}
+		
+		h1, h2, h3, h4, h5, h6, .font-mono {
+			font-family: var(--font-mono);
+		}
+	}
+
 	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
+		background-color: #050505;
+		color: #E0E0E0;
+	}
+
+	.crt-overlay {
+		opacity: 0.15;
+	}
+
+	.scanlines {
+		background: linear-gradient(
+			to bottom,
+			rgba(18, 16, 16, 0) 50%,
+			rgba(0, 0, 0, 0.1) 50%
+		);
+		background-size: 100% 4px;
+	}
+
+	.vignette {
+		background: radial-gradient(
+			circle,
+			rgba(18, 16, 16, 0) 40%,
+			rgba(0, 0, 0, 0.4) 100%
+		);
+	}
+
+	/* Custom Scrollbar for OLED */
+	::-webkit-scrollbar {
+		width: 4px;
+	}
+	::-webkit-scrollbar-track {
+		background: #050505;
+	}
+	::-webkit-scrollbar-thumb {
+		background: #1a1a1a;
+		border-radius: 2px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: #333;
+	}
+
+	@keyframes flicker {
+		0% { opacity: 0.97; }
+		5% { opacity: 0.95; }
+		10% { opacity: 0.9; }
+		15% { opacity: 0.95; }
+		20% { opacity: 0.98; }
+		25% { opacity: 0.95; }
+		30% { opacity: 0.9; }
+		100% { opacity: 1; }
+	}
+
+	.mission-frame {
+		animation: flicker 0.1s infinite alternate;
 	}
 </style>

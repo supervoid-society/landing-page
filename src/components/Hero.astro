@@ -1,0 +1,54 @@
+---
+import Blackhole from './Blackhole.astro';
+---
+<section class="flex flex-col items-center justify-center min-h-screen text-center relative overflow-hidden pt-20">
+    <div class="z-10 flex flex-col items-center max-w-4xl mx-auto px-4">
+        <div class="space-y-6 w-full flex flex-col items-center">
+            <div class="inline-block border border-white/20 bg-white/5 px-3 py-1 text-[10px] md:text-xs font-mono uppercase tracking-[0.3em]">
+                Origin: The Event Horizon
+            </div>
+            
+            <h1 class="text-5xl md:text-9xl font-bold tracking-tighter text-white uppercase italic leading-none">
+                Supervoid<br/>
+                <span class="text-white/40">Society</span>
+            </h1>
+
+            <p class="text-[12px] md:text-base font-mono text-white/60 max-w-xl mx-auto leading-relaxed pt-4">
+                Technical collective specializing in high-density development, security auditing, and systemic collapse prevention. Operating from the absolute center of the void.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6 pt-8">
+                <a href="javascript:void(0)" data-scroll-to="members" class="group relative px-6 md:px-8 py-3 bg-white text-black font-mono text-[10px] md:text-xs uppercase tracking-widest transition-all hover:bg-white/90">
+                    Access Personnel
+                    <div class="absolute -top-1 -right-1 w-2 h-2 bg-white/20 group-hover:bg-black transition-colors"></div>
+                    <div class="absolute -bottom-1 -left-1 w-2 h-2 bg-white/20 group-hover:bg-black transition-colors"></div>
+                </a>
+                <a href="javascript:void(0)" data-scroll-to="contact" class="px-6 md:px-8 py-3 border border-white/20 text-white font-mono text-[10px] md:text-xs uppercase tracking-widest hover:bg-white/5 transition-all">
+                    Establish Uplink
+                </a>
+            </div>
+
+            <!-- Optimized Blackhole Container -->
+            <div class="w-full flex justify-center py-8">
+                <div class="w-full max-w-[300px] md:max-w-[600px] aspect-square">
+                    <Blackhole />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Decorative Corner Elements -->
+    <div class="absolute top-10 left-10 hidden lg:block opacity-20 font-mono text-[10px] text-left">
+        <div class="mb-2 border-b border-white/20 pb-1">COORDINATES</div>
+        <div>LAT: 00.0000° N</div>
+        <div>LONG: 00.0000° E</div>
+        <div>ALT: -∞ KM</div>
+    </div>
+
+    <div class="absolute bottom-10 right-10 hidden lg:block opacity-20 font-mono text-[10px] text-right">
+        <div class="mb-2 border-b border-white/20 pb-1 text-right">TELEMETRY_LOG_01</div>
+        <div>STATUS: STABLE</div>
+        <div>ENTROPY: NOMINAL</div>
+        <div>VOID_SYNC: ACTIVE</div>
+    </div>
+</section>

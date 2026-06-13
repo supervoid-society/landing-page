@@ -1,0 +1,99 @@
+---
+const members = [
+    {
+        name: "Andika Dinata",
+        github: "https://github.com/andika0x01",
+        avatar: "https://avatars.githubusercontent.com/u/73385158?v=4",
+        role: "Lead Architect",
+        id: "SV-001"
+    },
+    {
+        name: "Aqil Fadhil Murbantresna",
+        github: "https://github.com/aqilfadhil1225",
+        avatar: "https://avatars.githubusercontent.com/u/154386191?v=4",
+        role: "Systems Engineer",
+        id: "SV-002"
+    },
+    {
+        name: "Aziz Prayoga",
+        github: "https://github.com/AzizPrayoga1",
+        avatar: "https://avatars.githubusercontent.com/u/88768457?v=4",
+        role: "Fullstack Developer",
+        id: "SV-003"
+    },
+    {
+        name: "Muhammad Defrizal",
+        github: "https://github.com/mhmddefrizal",
+        avatar: "https://avatars.githubusercontent.com/u/93093757?v=4",
+        role: "DevOps specialist",
+        id: "SV-004"
+    },
+    {
+        name: "Dzakwan Akbar Perdana Wijaya",
+        github: "https://github.com/dzkwanakbr",
+        avatar: "https://avatars.githubusercontent.com/u/75117824?v=4",
+        role: "Security Analyst",
+        id: "SV-005"
+    },
+    {
+        name: "Naufaldi Favian Archi",
+        github: "https://github.com/NaufaldiFavianArchi",
+        avatar: "https://avatars.githubusercontent.com/u/162379600?v=4",
+        role: "Frontend Specialist",
+        id: "SV-006"
+    }
+];
+---
+<section data-section="members" class="py-24 max-w-6xl mx-auto px-4">
+    <div class="mb-16">
+        <h2 class="text-xs font-mono uppercase tracking-[0.4em] text-white/40 mb-2">// Personnel_Directory</h2>
+        <div class="h-[1px] w-full bg-gradient-to-r from-white/20 to-transparent"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {members.map((member) => (
+            <div class="group relative bg-white/[0.02] border border-white/10 p-6 transition-all hover:border-white/40 hover:bg-white/[0.04]">
+                <!-- Top Badge -->
+                <div class="absolute top-0 right-0 p-2 font-mono text-[8px] opacity-30 group-hover:opacity-100 transition-opacity">
+                    ID: {member.id}
+                </div>
+                
+                <div class="flex items-start gap-4">
+                    <div class="relative">
+                        <img 
+                            src={member.avatar} 
+                            alt={member.name} 
+                            class="w-16 h-16 rounded-none grayscale group-hover:grayscale-0 transition-all border border-white/10"
+                        />
+                        <div class="absolute inset-0 border border-white/20 pointer-events-none"></div>
+                    </div>
+                    
+                    <div class="flex-1">
+                        <h3 class="text-white font-mono text-sm uppercase mb-1 tracking-wider">{member.name}</h3>
+                        <div class="text-[10px] font-mono text-white/40 mb-4 uppercase">{member.role}</div>
+                        
+                        <a 
+                            href={member.github} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 text-[10px] font-mono text-white/60 hover:text-white transition-colors"
+                        >
+                            <span>GITHUB_ACCESS</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Bottom Status Bar -->
+                <div class="mt-6 flex items-center justify-between border-t border-white/5 pt-4">
+                    <div class="flex gap-1">
+                        <div class="w-1 h-1 bg-white opacity-50"></div>
+                        <div class="w-1 h-1 bg-white opacity-50"></div>
+                        <div class="w-1 h-1 bg-white opacity-20"></div>
+                    </div>
+                    <span class="text-[8px] font-mono opacity-30 uppercase tracking-widest">Status: Active</span>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>

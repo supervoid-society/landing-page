@@ -1,0 +1,71 @@
+---
+const logs = [
+    {
+        date: "2026",
+        title: "Ranking: CTFTime Indonesia",
+        description: "Currently holding Rank #22 in the CTFTime Indonesia Leaderboard.",
+        status: "ACTIVE"
+    },
+    {
+        date: "2025",
+        title: "Ranking: CTFTime Indonesia",
+        description: "Successfully reached Rank #19 in the CTFTime Indonesia Leaderboard.",
+        status: "COMPLETED"
+    },
+    {
+        date: "2025",
+        title: "Achievement: Nusantara Cyber Security",
+        description: "Achieved Runner Up position in the Nusantara Cyber Security challenge.",
+        status: "COMPLETED"
+    },
+    {
+        date: "2025",
+        title: "Achievement: Pesawaran CTF",
+        description: "Secured 3rd Place in the Pesawaran Cyber Security Competition.",
+        status: "COMPLETED"
+    }
+];
+---
+<section data-section="activities" class="py-24 max-w-4xl mx-auto px-4">
+    <div class="mb-16">
+        <h2 class="text-xs font-mono uppercase tracking-[0.4em] text-white/40 mb-2">// Mission_Logs</h2>
+        <div class="h-[1px] w-full bg-gradient-to-r from-white/20 to-transparent"></div>
+    </div>
+
+    <div class="space-y-12">
+        {logs.map((log) => (
+            <div class="relative pl-8 md:pl-32">
+                <!-- Timeline Line -->
+                <div class="absolute left-0 top-0 bottom-[-48px] w-[1px] bg-white/10 md:left-24"></div>
+                
+                <!-- Date (Desktop) -->
+                <div class="hidden md:block absolute left-0 top-0 text-[10px] font-mono text-white/40 tracking-tighter">
+                    {log.date}
+                </div>
+
+                <!-- Point -->
+                <div class="absolute left-[-4px] top-1 w-2 h-2 bg-white md:left-[92px]"></div>
+
+                <div class="group border border-white/10 bg-white/[0.02] p-6 hover:border-white/30 transition-all">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                        <h3 class="text-white font-mono text-sm uppercase tracking-widest">{log.title}</h3>
+                        <div class={`text-[8px] font-mono px-2 py-0.5 border ${
+                            log.status === 'COMPLETED' ? 'border-white/20 text-white/40' : 
+                            log.status === 'ACTIVE' ? 'border-white text-white' : 'border-white/10 text-white/20'
+                        }`}>
+                            STATUS_{log.status}
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm font-mono text-white/50 leading-relaxed">
+                        {log.description}
+                    </p>
+
+                    <div class="md:hidden mt-4 text-[10px] font-mono text-white/30">
+                        {log.date}
+                    </div>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
