@@ -4,12 +4,17 @@ import "@fontsource/geist-mono";
 interface Props {
 	title?: string;
 	description?: string;
+	image?: string;
 }
 
 const { 
-	title = "Supervoid Society | IT Community based in Bandar Lampung, Indonesia.",
-	description = "A collective of technical minds operating from the void."
+	title = "Supervoid Society | IT Community in Bandar Lampung, Indonesia",
+	description = "A collective of technical minds operating from the void. The premier IT community based in Bandar Lampung, Indonesia.",
+	image = "/og-image.png"
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
+const socialImageURL = new URL(image, Astro.url);
 ---
 
 <!doctype html>
@@ -20,8 +25,28 @@ const {
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Canonical URL -->
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Primary Meta Tags -->
 		<title>{title}</title>
+		<meta name="title" content={title} />
 		<meta name="description" content={description} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={socialImageURL} />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={Astro.url} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={socialImageURL} />
 	</head>
 	<body class="bg-oled-black text-[#E0E0E0] selection:bg-[#333333] selection:text-white overflow-x-hidden antialiased">
 		<!-- CRT Overlay -->
